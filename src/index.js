@@ -1,11 +1,11 @@
 const { query } = require('./db');
-const { mainMenu } = require('./prompts');
+const prompts = require('./prompts');
 
 async function runApp() {
   let exit = false;
 
   while (!exit) {
-    const { action } = await mainMenu();
+    const { action } = await prompts.mainMenu();
 
     switch (action) {
       case 'View all departments':
@@ -51,6 +51,34 @@ async function viewEmployees() {
   console.table(employees);
 }
 
-// Define addDepartment, addRole, addEmployee, and updateEmployeeRole functions here
+async function addDepartment() {
+  const { name } = await prompts.addDepartmentPrompt();
+  await query('INSERT INTO department (name) VALUES (?)', [name]);
+  console.log(`Added department: ${name}`);
+}
+
+async function addRole() {
+  const departments = await query('SELECT * FROM department');
+  const { title, salary, department_id } = await prompts.addRolePrompt(departments);
+  await query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [title, salary, department_id]);
+  console.log(`Added role: ${title}`);
+}
+
+async function addEmployee() {
+  const roles = await query('SELECT * FROM role');
+  const managers = await query('SELECT * FROM employee');
+  const { first_name, last_name, role_id, manager_id } = await prompts.addEmployeePrompt(roles, managers);
+  await query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [first_name, last_name, role_id, manager_id]);
+  console.log(`Added employee: ${first_name} ${last_name}`);
+}
+
+async function updateEmployeeRole() {
+  const employees = await query('SELECT * FROM employee');
+  const roles = await query('SELECT * FROM role');
+  const { employee_id, role_id } = await prompts.updateEmployeeRolePrompt(employees, roles);
+  await query('UPDATE employee SET role_id = ? WHERE id = ?', [role_id, employee_id]);
+  console.log(`Updated employee role`);
+}
 
 runApp();
+
