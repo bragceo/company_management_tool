@@ -1,22 +1,25 @@
-USE company_db;
-
 INSERT INTO department (name)
-VALUES
-  ('Sales'),
-  ('Engineering'),
-  ('Finance'),
-  ('Marketing');
+VALUES ("Engineering"),
+       ("Finance"),
+       ("Legal"),
+       ("Sales");
 
 INSERT INTO role (title, salary, department_id)
-VALUES
-  ('Sales Manager', 85000, 1),
-  ('Software Engineer', 75000, 2),
-  ('Accountant', 55000, 3),
-  ('Marketing Specialist', 60000, 4);
+VALUES ("Sales Lead", 100000, 4),
+       ("Salesperson", 80000, 4),
+       ("Lead Engineer", 150000, 1),
+       ("Software Engineer", 120000, 1),
+       ("Account Manager", 160000, 2),
+       ("Accountant", 125000, 2),
+       ("Legal Team Lead", 250000, 3),
+       ("Lawyer", 190000, 3);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES
-  ('John', 'Doe', 1, NULL),
-  ('Jane', 'Smith', 2, 1),
-  ('Jim', 'Brown', 3, 1),
-  ('Jill', 'Johnson', 4, 1);
+VALUES ("John", "Doe", 1, null),
+       ("Mike", "Chan", 2, 1),
+       ("Ashley", "Rodriguez", 3, null),
+       ("Kevin", "Tupik", 4, 3),
+       ("Kunal", "Singh", 5, null),
+       ("Malia", "Brown", 6, 5),
+       ("Sarah", "Lourd", 7, null),
+       ("Tom", "Allen", 8, 7);
