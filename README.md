@@ -7,7 +7,7 @@ The code provided is for a command-line application that allows a business owner
 ## User Story
 
 AS A business owner <br>
-I WANT to be able to view and manage the departments, roles, and employees in my company
+I WANT to be able to view and manage the departments, roles, and employees in my company <br>
 SO THAT I can organize and plan my business <br>
 
 ## Acceptance Criteria
