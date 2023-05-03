@@ -1,4 +1,4 @@
-# company_management_tool
+# Company_Management_Tool
 
 ## Description 
 
